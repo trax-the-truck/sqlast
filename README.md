@@ -9,7 +9,7 @@ This is a minimal wrapper to interact with the library, it has no buisness logic
 With a rust environment setup, `cargo build --release` and pull the binary from `target/release/sqlast`.
 The easist way to do this is by using a rust container image (either docker or Microsoft devcontainer images).
 
-To cross compile for an architecture, OS, or libc distribution add the `--target` flag.
+To cross compile for an architecture, OS, or libc distribution add the `--target` flag. This doesn't always work for every platform, so the best option is to nativly compile for an OS.
 
 ## Usage
 
