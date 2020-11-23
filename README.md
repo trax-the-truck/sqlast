@@ -4,6 +4,12 @@ Query parsing and composing via the [sqlparser](https://docs.rs/sqlparser/0.6.1/
 
 This is a minimal wrapper to interact with the library, it has no buisness logic or rewriting code.
 
+## Install
+
+Download the latest release for either Linux or macOS [here](https://github.com/mobikitinc/sqlast/releases).
+
+Put this file in your $PATH (this could be `~/bin`, `/usr/local/bin`, or another location). If you don't download the binary named `sqlast` (the linux default binary) be sure to rename it in your path.
+
 ## Compiling
 
 With a rust environment setup, `cargo build --release` and pull the binary from `target/release/sqlast`.
