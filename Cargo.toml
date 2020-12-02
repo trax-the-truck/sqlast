@@ -9,3 +9,12 @@ license     = "none"
 [dependencies]
 sqlparser = { version = "0.6.1", features = ["serde"] }
 serde_json = { version = "1.0"}
+
+[package.metadata.rpm]
+package = "sqlast"
+
+[package.metadata.rpm.cargo]
+buildflags = ["--release"]
+
+[package.metadata.rpm.targets]
+sqlast = { path = "/usr/bin/sqlast" }

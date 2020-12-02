@@ -17,6 +17,19 @@ The easist way to do this is by using a rust container image (either docker or M
 
 To cross compile for an architecture, OS, or libc distribution add the `--target` flag. This doesn't always work for every platform, so the best option is to nativly compile for an OS.
 
+## Packaging with RPM
+
+1. Open a VM/Container with CentOS
+    * Match the CentOS version with the prod image type (or Amazon equivalent)
+2. [Install Rust](https://www.rust-lang.org)
+3. [Install cargo-rpm](https://www.rust-lang.org)
+    * `cargo install cargo-rpm`
+    * This will build the SPEC files for us
+4. Run `cargo rpm init`
+    * This will build a specfile in `.rpm`
+5. Run `cargo rpm build`
+    * Output files will be in `target/release/rpmbuild`
+
 ## Usage
 
 `sqlast parse 'SELECT * FROM abc'`
