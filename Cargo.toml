@@ -1,6 +1,6 @@
 [package]
 name = "sqlast"
-version = "0.0.0"
+version = "0.2.0"
 authors = ["Mobikit <mobikit.io>"]
 edition = "2018"
 description = "SQL parsing and composing"
