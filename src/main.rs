@@ -2,6 +2,7 @@ use sqlparser::dialect::GenericDialect;
 use sqlparser::parser::Parser;
 use std::env;
 use std::fmt;
+use std::io::{self, Read};
 use std::process;
 
 // A custom error type
@@ -19,23 +20,37 @@ impl fmt::Display for SqlAstError {
     }
 }
 
+fn run(mut args: Vec<String>) -> Result<String, SqlAstError> {
+    // Usage `sqlast <parse|compose> <data>`
+    if args.len() != 3 {
+        return Err(SqlAstError {
+            reason: "Invalid number of args.".to_string(),
+        });
+    }
+
+    // Rewrite to support stdin
+    if args[2] == "-" {
+        args[2].clear();
+        if io::stdin().read_to_string(&mut args[2]).is_err() {
+            return Err(SqlAstError {
+                reason: "Error reading from stdin.".to_string(),
+            });
+        }
+    }
+
+    match args[1].as_ref() {
+        "parse" => parse(&args[2]),
+        "compose" => compose(&args[2]),
+        other => Err(SqlAstError {
+            reason: format!("Unknown command {}", other),
+        }),
+    }
+}
+
 fn main() {
     let args = env::args().collect::<Vec<String>>();
 
-    // Usage `sqlast <parse|compose> <data>`
-    let result = if args.len() == 3 {
-        match args[1].as_ref() {
-            "parse" => parse(&args[2]),
-            "compose" => compose(&args[2]),
-            other => Err(SqlAstError {
-                reason: format!("Unknown command {}", other),
-            }),
-        }
-    } else {
-        Err(SqlAstError {
-            reason: "Invalid number of args.".to_string(),
-        })
-    };
+    let result = run(args);
 
     match result {
         Ok(output) => println!("{}", output),
