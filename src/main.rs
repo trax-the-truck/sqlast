@@ -21,10 +21,17 @@ impl fmt::Display for SqlAstError {
 }
 
 fn run(mut args: Vec<String>) -> Result<String, SqlAstError> {
+    if args.len() == 2 && args[1] == "--help" {
+        return Ok(
+            format!("sqlast {}\n", env!("CARGO_PKG_VERSION")) +
+            "Usage: sqlast <parse|compose> <data>"
+        )
+    }
+
     // Usage `sqlast <parse|compose> <data>`
     if args.len() != 3 {
         return Err(SqlAstError {
-            reason: "Invalid number of args.".to_string(),
+            reason: "Invalid number of args. Try --help".to_string(),
         });
     }
 
