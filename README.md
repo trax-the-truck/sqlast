@@ -6,7 +6,7 @@ This is a minimal wrapper to interact with the library, it has no buisness logic
 
 ## Install
 
-Download the latest release for either Linux or macOS [here](https://github.com/mobikitinc/sqlast/releases).
+Download the latest release for either Linux or macOS [here](https://github.com/trax-the-truck/sqlast/releases).
 
 Put this file in your $PATH (this could be `~/bin`, `/usr/local/bin`, or another location). If you don't download the binary named `sqlast` (the linux default binary) be sure to rename it in your path.
 
